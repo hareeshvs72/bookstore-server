@@ -73,6 +73,8 @@ exports.googleLoginController = async (req,res)=>{
               username,email,password,profile
             })
             await newUser.save()
+            console.log(newUser);
+            
             // token
            const token = jwt.sign({userMail:newUser.email},process.env.JWTSECRET)
               res.status(200).json({user:newUser,token})
