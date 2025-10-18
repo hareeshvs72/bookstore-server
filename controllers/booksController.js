@@ -30,3 +30,17 @@ exports.addBookController = async (req,res)=>{
 
   
 }
+// get home books
+
+exports.getHomeBooks = async(req,res)=>{
+  console.log("insided get home book");
+  
+  try {
+     const allHomeBooks = await books.find().sort({_id:-1}).limit(4)
+     res.status(200).json(allHomeBooks)
+  } catch (error) {
+   res.status(500).json(error)
+    
+  }
+
+}
