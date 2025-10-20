@@ -44,3 +44,27 @@ exports.getHomeBooks = async(req,res)=>{
   }
 
 }
+
+// get all books
+
+exports.getAllBooks = async(req,res)=>{
+  console.log("insided get home book");
+    const email =  req.payload
+  try {
+     const allbooks = await books.find({userMail:{$ne:email}})
+     res.status(200).json(allbooks)
+  } catch (error) {
+   res.status(500).json(error)
+    
+  }
+
+}
+
+// view book
+
+exports.viewBookController = async(req,res)=>{
+  console.log("inside viewBook Controller");
+  
+  
+  
+}
