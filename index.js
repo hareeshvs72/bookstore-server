@@ -12,6 +12,7 @@ const bookStoreServer = express()
 bookStoreServer.use(cors())
 bookStoreServer.use(express.json()) // parse json
 bookStoreServer.use(router)
+bookStoreServer.use('/uploads',express.static('./uploads'))
 // create prot for aplication
 
 const PORT = 3000
