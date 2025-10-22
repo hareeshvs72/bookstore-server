@@ -50,8 +50,13 @@ exports.getHomeBooks = async(req,res)=>{
 exports.getAllBooks = async(req,res)=>{
   console.log("insided get home book");
     const email =  req.payload
+    const searchKey = req.query.search
+    const query = {
+     userMail:{$ne:email},
+     title:{$regex:searchKey,$options:'i'}
+    }
   try {
-     const allbooks = await books.find({userMail:{$ne:email}})
+     const allbooks = await books.find(query)
      res.status(200).json(allbooks)
   } catch (error) {
    res.status(500).json(error)
