@@ -30,7 +30,7 @@ router.get('/books/:id/view',jwtMiddleware,bookController.viewBookController)
  router.get('/user-bought-book',jwtMiddleware,bookController.getAllUserBoughtBooks)
 //  delete user book
  
-router.get('/user-book/:id/remove',jwtMiddleware,bookController.deleteUserBook)
+router.delete('/user-book/:id/remove',jwtMiddleware,bookController.deleteUserBook)
 
 // get user
 
