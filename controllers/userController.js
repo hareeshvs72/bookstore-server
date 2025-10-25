@@ -84,4 +84,21 @@ exports.googleLoginController = async (req,res)=>{
           }
           // res.status(200).send("register req recived !!!")      
 }
-// profile
+// profile - user
+
+exports.userProfileWditController = async (req,res)=>{
+    console.log("inside userProfile Edit controller");
+    // get data to be update from req, boday ,payload ,file
+
+    const {username,password,profile,bio,role} = req.body
+
+    const email = req.payload
+    const updateProfile  = req.file?req.file.filename : profile
+    try {
+      const updateUser = await users.findOneAndUpdate({email},{username,email,password,profile:updateProfile,bio,role},{new:true})
+      await updateUser.save()
+      res.status(200).json(updateUser)
+    } catch (error) {
+      res.status(500).json(error)
+    }
+}

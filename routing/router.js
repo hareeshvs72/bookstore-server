@@ -17,6 +17,9 @@ router.post('/add-book',jwtMiddleware,multerConfig.array('uploadImg',3), bookCon
 
 router.get('/home-books',bookController.getHomeBooks)
 
+// autherised user 
+
+
 //  get all books in books component page
 
 router.get('/all-books',jwtMiddleware,bookController.getAllBooks)
@@ -32,6 +35,8 @@ router.get('/books/:id/view',jwtMiddleware,bookController.viewBookController)
  
 router.delete('/user-book/:id/remove',jwtMiddleware,bookController.deleteUserBook)
 
-// get user
+// user profile update
+
+router.put('/user-profile/edit',jwtMiddleware,multerConfig.single("profile"),userController.userProfileWditController)
 
 module.exports = router
