@@ -42,6 +42,16 @@ router.put('/user-profile/edit',jwtMiddleware,multerConfig.single("profile"),use
 
 //---------------------- autherised user - admin ---------------------------
 
+// get all user
 router.get('/all-user',adminJwtMiddleware,userController.getAllUsersController)
+
+// get all user books
+
+router.get('/admin-all-books',adminJwtMiddleware,bookController.getAllBookAdminController)
+
+// update status of book by  admin
+
+router.put('/admin/book/approve',adminJwtMiddleware,bookController.updateBookStatusController)
+
 
 module.exports = router

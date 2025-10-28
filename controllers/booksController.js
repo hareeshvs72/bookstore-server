@@ -127,3 +127,31 @@ exports.deleteUserBook = async(req,res)=>{
       
       
 }
+
+exports.getAllBookAdminController = async (req,res)=>{
+ console.log("inside getAllBookAdminController");
+ try {
+   const allAdminBooks = await books.find()
+   res.status(200).json(allAdminBooks)
+ } catch (error) {
+   res.status(500).json(error)
+ }
+ 
+}
+
+// updaet staus to approve  of books by admin 
+
+exports.updateBookStatusController =async (req,res)=>{
+   
+  console.log("inside updateBookStatusController ");
+  
+  const {_id,title,author,noOfPages,imageUrl,price,discountPrice,abstract,publisher,language,isbn,category,uploadImg ,status,userMail,bought}  = req.body
+  try {
+    const updateBook = await books.findByIdAndUpdate({_id},{title,author,noOfPages,imageUrl,price,discountPrice,abstract,publisher,language,isbn,category,uploadImg,status:"approve",userMail,bought},{new:true})
+    await updateBook.save()
+    res.status(200).json(updateBook)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+
+}
