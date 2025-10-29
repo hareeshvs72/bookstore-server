@@ -16,8 +16,7 @@ const adminJwtMiddleware = (req,res,next)=> {
              res.status(401).json("Unauthorised user !!!")
 
         }
-          
-        
+
      } catch (error) {
         res.status(401).json("invalid token",error)
 

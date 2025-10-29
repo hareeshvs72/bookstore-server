@@ -119,3 +119,24 @@ exports.getAllUsersController = async (req,res)=>{
      }
   
 }
+
+// update admin profile
+
+exports.adminProfileUpdateController = async (req,res)=>{
+   console.log("insdie  adminProfileUpdateController");
+   const {username,password,profile,bio,role} = req.body
+   const adminEmail = req.payload
+   
+     
+       const updateProfile  = req.file?req.file.filename : profile
+      
+       
+   
+   try {
+    const updateAdmin = await users.findOneAndUpdate({email:adminEmail},{username,email,password,profile:updateProfile,bio,role},{new:true})
+    await updateAdmin.save()
+    res.status(200).json(updateAdmin)
+   } catch (error) {
+    res.status(500).json(error)
+   }
+}
