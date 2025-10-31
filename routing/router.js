@@ -6,6 +6,8 @@ const jwtMiddleware = require('../jwtMiddleware/jwtMiddleware')
 const multerConfig = require('../jwtMiddleware/imageMulterMiddleware')
 const adminJwtMiddleware = require('../jwtMiddleware/adminJwtMiddleware')
 const jobController = require('../controllers/jobController')
+const pdfMulterConfig = require('../jwtMiddleware/pdfMulterMiddleWare')
+const aplicationController = require('../controllers/aplicationController')
 // register
 router.post('/register', userController.registerController)
 
@@ -41,6 +43,12 @@ router.delete('/user-book/:id/remove', jwtMiddleware, bookController.deleteUserB
 
 router.put('/user-profile/edit', jwtMiddleware, multerConfig.single("profile"), userController.userProfileWditController)
 
+// add-application
+
+router.post('/apllication/add',jwtMiddleware,pdfMulterConfig.single("resume"),aplicationController.addAplicationController)
+
+
+
 //---------------------- autherised user - admin ---------------------------
 
 // get all user
@@ -57,6 +65,11 @@ router.put('/admin/book/approve', adminJwtMiddleware, bookController.updateBookS
 // update admin profile 
 
 router.put('/admin-profile-edit', adminJwtMiddleware, multerConfig.single("profile"), userController.adminProfileUpdateController)
+
+// get application 
+
+
+router.post('/all-aplication',adminJwtMiddleware,aplicationController.getAplicationController)
 
 
 // ------------------------jobs ------------
