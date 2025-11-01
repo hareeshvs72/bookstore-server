@@ -1,6 +1,6 @@
 const applications = require('../models/aplicationModel')
 
-// add Aplication 
+// add Aplication - user
 
 exports.addAplicationController = async (req,res)=>{
     console.log("inside add aplication controller");
@@ -23,7 +23,7 @@ exports.addAplicationController = async (req,res)=>{
     }
 }
 
-// get application 
+// get application  - admin
 
 exports.getAplicationController = async(req,res)=>{
     console.log("inside get Aplication Controller");

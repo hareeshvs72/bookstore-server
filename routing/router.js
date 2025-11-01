@@ -69,7 +69,7 @@ router.put('/admin-profile-edit', adminJwtMiddleware, multerConfig.single("profi
 // get application 
 
 
-router.post('/all-aplication',adminJwtMiddleware,aplicationController.getAplicationController)
+router.get('/all-aplication',adminJwtMiddleware,aplicationController.getAplicationController)
 
 
 // ------------------------jobs ------------
