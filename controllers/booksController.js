@@ -1,4 +1,5 @@
 const books = require('../models/bookModal')
+const stripe = require("stripe")("sk_test_51SPbdnFP9sjWd71Vyu2FKMoUayw6Feq1K1nKf8xw7pifNwdJxTwyMrHKe63Kjksg2CHOU4Nmg3uB0sOdVePVLkfk000OzIZ9bv")
 
 exports.addBookController = async (req,res)=>{
   console.log("inside add Book Controller");
@@ -145,7 +146,7 @@ exports.updateBookStatusController =async (req,res)=>{
    
   console.log("inside updateBookStatusController ");
   
-  const {_id,title,author,noOfPages,imageUrl,price,discountPrice,abstract,publisher,language,isbn,category,uploadImg ,status,userMail,bought}  = req.body
+  const {_id,title,author,noOfPages,imageUrl,price,discountPrice,abstract,publisher,language,isbn,category,uploadImg ,userMail,bought}  = req.body
   try {
     const updateBook = await books.findByIdAndUpdate({_id},{title,author,noOfPages,imageUrl,price,discountPrice,abstract,publisher,language,isbn,category,uploadImg,status:"approve",userMail,bought},{new:true})
     await updateBook.save()
@@ -153,5 +154,41 @@ exports.updateBookStatusController =async (req,res)=>{
   } catch (error) {
     res.status(500).json(error)
   }
+
+}
+
+// make payment 
+
+exports.makeBookPayemnetController = async (req,res)=>{
+  console.log("inside make book controller");
+
+   const {_id,title,author,noOfPages,imageUrl,price,discountPrice,abstract,publisher,language,isbn,category,uploadImg,userMail } = req.body
+   const email = req.payload
+
+   try {
+     const updateBookDetails = await books.findByIdAndUpdate({_id},{title,author,noOfPages,imageUrl,price,discountPrice,abstract,publisher,language,isbn,category,uploadImg,status:"sold",userMail,bought:email},{new:true})
+     console.log(updateBookDetails);
+
+    //  stripe check out section
+
+    const line_items = [{
+      price_data:{
+        currency:'usd',
+        product_data:{
+          name:title,
+          description:`${author} | ${publisher}`,
+          images:uploadImg,
+          metadata:{
+            title,author,noOfPages,imageUrl,price,discountPrice,abstract,publisher,language,isbn,category,status:"sold",userMail,bought:email
+          }
+        },
+        unit_amount:Math.round(discountPrice*100)
+      },
+      quantity:1
+    }]
+     
+   } catch (error) {
+    res.status(500).json(error)
+   }
 
 }
