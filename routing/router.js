@@ -48,6 +48,11 @@ router.put('/user-profile/edit', jwtMiddleware, multerConfig.single("profile"), 
 router.post('/apllication/add',jwtMiddleware,pdfMulterConfig.single("resume"),aplicationController.addAplicationController)
 
 
+// make payment
+
+router.post('/make-payment',jwtMiddleware,bookController.makeBookPayemnetController)
+
+
 
 //---------------------- autherised user - admin ---------------------------
 
