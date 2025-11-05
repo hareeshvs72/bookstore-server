@@ -192,8 +192,12 @@ console.log(req.body);
       payment_method_types:['card'],
       line_items,
       mode: 'payment',
-      success_url: 'http://localhost:5173/payment-success',
-      cancel_url: 'http://localhost:5173/payment-error'
+      // success_url: 'http://localhost:5173/payment-success',
+      // cancel_url: 'http://localhost:5173/payment-error'
+      // https://vercel.com/hareesh-v-ss-projects/front-end-book-store-r2a8/71urjzpaKHZm8nTuyWy8Duu8zypz
+
+        success_url: 'https://vercel.com/hareesh-v-ss-projects/front-end-book-store-r2a8/71urjzpaKHZm8nTuyWy8Duu8zypz/payment-success',
+      cancel_url: 'https://vercel.com/hareesh-v-ss-projects/front-end-book-store-r2a8/71urjzpaKHZm8nTuyWy8Duu8zypz/payment-error'
     });
     console.log(session);
     res.status(200).json({checkOutSessionURL:session.url})
